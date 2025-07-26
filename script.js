@@ -758,6 +758,7 @@ function loadBenefits() {
 function createBenefitCard(benefit) {
     const card = document.createElement('div');
     card.className = 'benefit-card loading';
+    card.dataset.benefitId = benefit.id;
     card.innerHTML = `
         <div class="benefit-header">
             <div class="benefit-logo">
@@ -769,10 +770,22 @@ function createBenefitCard(benefit) {
         <div class="benefit-tags">
             ${benefit.tags.map(tag => `<span class="benefit-tag">${tag}</span>`).join('')}
         </div>
-        <div class="benefit-value">${benefit.value}</div>
+        <div class="benefit-footer">
+            <div class="benefit-value">${benefit.value}</div>
+            <a href="${benefit.link}" target="_blank" class="benefit-link-btn">
+                <span>Get Benefit</span>
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
     `;
 
-    card.addEventListener('click', () => openModal(benefit));
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('.benefit-link-btn')) {
+            e.stopPropagation();
+            return;
+        }
+        openModal(benefit);
+    });
 
     return card;
 }

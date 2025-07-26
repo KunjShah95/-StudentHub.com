@@ -1944,6 +1944,15 @@ body.light-mode .dark-mode-toggle i {
   font-weight: 500;
 }
 
+.benefit-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
 .benefit-value {
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
   color: white;
@@ -1951,8 +1960,26 @@ body.light-mode .dark-mode-toggle i {
   border-radius: 25px;
   font-weight: 700;
   text-align: center;
-  position: relative;
-  z-index: 2;
+}
+
+.benefit-link-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.benefit-link-btn:hover {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
 }
 
 .load-more-container {
