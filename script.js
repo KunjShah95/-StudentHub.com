@@ -266,7 +266,6 @@ const loadMoreBtn = document.getElementById('loadMoreBtn');
 const exploreBtn = document.getElementById('exploreBtn');
 const modal = document.getElementById('benefitModal');
 const closeModal = document.querySelector('.close');
-const darkModeToggle = document.getElementById('darkModeToggle');
 
 // State
 let currentFilter = 'all';
@@ -283,7 +282,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setupScrollEffects();
     setupIntersectionObserver();
     initialize4DEffects();
-    initializeDarkMode();
 });
 
 // Create Advanced Particle System
@@ -638,11 +636,6 @@ function setupEventListeners() {
         });
     }
 
-    // Dark mode toggle
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', toggleDarkMode);
-    }
-
     // Filter buttons
     filterButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -969,45 +962,3 @@ function addFloatingActionButton() {
 
 // Initialize FAB after DOM load
 setTimeout(addFloatingActionButton, 2000);
-
-// Dark Mode Functionality
-function initializeDarkMode() {
-    // Check for saved dark mode preference or default to dark mode
-    const savedMode = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedMode === 'light' || (savedMode === null && !prefersDark)) {
-        document.body.classList.add('light-mode');
-        updateDarkModeIcon(false);
-    } else {
-        updateDarkModeIcon(true);
-    }
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('light-mode');
-    const isLightMode = document.body.classList.contains('light-mode');
-
-    // Save preference
-    localStorage.setItem('darkMode', isLightMode ? 'light' : 'dark');
-
-    // Update icon
-    updateDarkModeIcon(!isLightMode);
-
-    // Add transition effect
-    document.body.style.transition = 'all 0.3s ease';
-    setTimeout(() => {
-        document.body.style.transition = '';
-    }, 300);
-}
-
-function updateDarkModeIcon(isDarkMode) {
-    const icon = darkModeToggle?.querySelector('i');
-    if (icon) {
-        if (isDarkMode) {
-            icon.className = 'fas fa-moon';
-        } else {
-            icon.className = 'fas fa-sun';
-        }
-    }
-}
